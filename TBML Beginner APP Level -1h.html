@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr Mariola Marzouk's TBML Academy - Beginner Module</title>
+    <style>
+        :root {
+            --color-primary-red: #9f0000;
+            --color-accent-green: #89d957;
+            --color-gradient-start: #0cc0df;
+            --color-gradient-end: #ffde59;
+            --color-bg: #f8f9fa;
+            --color-surface: #ffffff;
+            --color-text: #1f2121;
+            --color-text-secondary: #626c7c;
+            --color-border: #e0e3e6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.5;
+            color: var(--color-text);
+            background: var(--color-bg);
+        }
+
+        body {
+            background: linear-gradient(90deg, rgba(12, 192, 223, 0.7) 0%, rgba(255, 222, 89, 0.7) 100%);
+        }
+
+        header {
+            background: var(--color-primary-red);
+            color: white;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 2px 8px rgba(159, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        header h1 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: var(--color-surface);
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .landing-hero {
+            background: linear-gradient(135deg, #c41e3a 0%, #6b0000 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .landing-hero h2 {
+            font-size: 32px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .landing-hero p {
+            font-size: 18px;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .bio-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--color-accent-green);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--color-accent-green);
+            color: var(--color-primary-red);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(137, 217, 87, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .lesson-grid {
+            display: grid;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .lesson-item {
+            background: var(--color-surface);
+            border-left: 4px solid var(--color-primary-red);
+            padding: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid var(--color-border);
+        }
+
+        .lesson-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateX(4px);
+        }
+
+        .lesson-item.completed {
+            background: rgba(137, 217, 87, 0.05);
+            border-left-color: var(--color-accent-green);
+        }
+
+        .lesson-item h3 {
+            font-size: 16px;
+            margin-bottom: 4px;
+            color: var(--color-text);
+        }
+
+        .lesson-item p {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            margin: 0;
+        }
+
+        .lesson-content {
+            display: none;
+        }
+
+        .lesson-content.active {
+            display: block;
+        }
+
+        .lesson-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .lesson-header h2 {
+            font-size: 24px;
+            color: var(--color-primary-red);
+            margin: 0;
+        }
+
+        .progress-indicator {
+            display: flex;
+            gap: 4px;
+        }
+
+        .progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-border);
+        }
+
+        .progress-dot.active {
+            background: var(--color-primary-red);
+        }
+
+        .key-insight {
+            background: linear-gradient(135deg, rgba(159, 0, 0, 0.05) 0%, rgba(137, 217, 87, 0.05) 100%);
+            border-left: 4px solid var(--color-primary-red);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .key-insight strong {
+            color: var(--color-primary-red);
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .why-it-matters {
+            background: rgba(137, 217, 87, 0.08);
+            border-left: 4px solid var(--color-accent-green);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .why-it-matters strong {
+            color: #2d5016;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .evidence-flag {
+            background: rgba(12, 192, 223, 0.08);
+            border-left: 4px solid #0cc0df;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 12px 0;
+            font-size: 13px;
+        }
+
+        .evidence-flag strong {
+            color: #0cc0df;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .case-decision {
+            background: var(--color-surface);
+            border: 2px solid var(--color-border);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .case-decision h3 {
+            color: var(--color-primary-red);
+            margin-bottom: 12px;
+        }
+
+        .decision-option {
+            background: rgba(0, 0, 0, 0.02);
+            border: 1px solid var(--color-border);
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .decision-option:hover {
+            background: rgba(159, 0, 0, 0.05);
+            border-color: var(--color-primary-red);
+        }
+
+        .decision-option input[type="radio"] {
+            margin-right: 8px;
+        }
+
+        .decision-consequence {
+            background: linear-gradient(135deg, rgba(12, 192, 223, 0.1) 0%, rgba(255, 222, 89, 0.1) 100%);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+            border: 1px solid var(--color-border);
+            display: none;
+        }
+
+        .decision-consequence.show {
+            display: block;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+            justify-content: space-between;
+        }
+
+        .btn-nav {
+            flex: 1;
+            padding: 12px;
+            font-size: 14px;
+        }
+
+        .certificate {
+            background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-end) 100%);
+            border: 3px solid var(--color-primary-red);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            color: var(--color-text);
+            display: none;
+        }
+
+        .certificate.show {
+            display: block;
+        }
+
+        .certificate-logo {
+            height: 60px;
+            margin-bottom: 20px;
+        }
+
+        .certificate h2 {
+            font-size: 28px;
+            color: var(--color-primary-red);
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .certificate p {
+            font-size: 16px;
+            margin: 12px 0;
+        }
+
+        .certificate-id {
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            margin: 20px 0;
+            color: var(--color-primary-red);
+            font-weight: 600;
+        }
+
+        .certificate-badge {
+            display: inline-block;
+            background: var(--color-accent-green);
+            color: var(--color-primary-red);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+
+        .btn-download {
+            background: var(--color-primary-red);
+            color: white;
+            margin-top: 20px;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(159, 0, 0, 0.3);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .stat-box {
+            background: rgba(159, 0, 0, 0.05);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .stat-box .number {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-accent-green);
+        }
+
+        .stat-box .label {
+            font-size: 12px;
+            color: var(--color-accent-green);
+            margin-top: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .landing-hero {
+                padding: 24px;
+            }
+
+            .landing-hero h2 {
+                font-size: 24px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .certificate {
+                padding: 24px;
+            }
+
+            .certificate h2 {
+                font-size: 20px;
+            }
+
+            header h1 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/bbf1d58f-1905-4676-99a4-59cb7dacedb1" alt="Meva Logo" class="logo-img">
+        <h1>Beginner TBML Academy</h1>
+    </header>
+
+    <div class="container">
+        <!-- LANDING PAGE -->
+        <div id="landing" class="landing-content">
+            <div class="landing-hero">
+                <h2 style="color: var(--color-accent-green);">Welcome to Dr Mariola Marzouk's TBML Academy</h2>
+                <p><strong>Understand Trade-Based Money Laundering (TBML) from First Principles</strong></p>
+                <p style="font-size: 16px; margin-top: 20px;">A rigorous, research-backed introduction to TBML—what regulators get wrong, what technology misses, and why simplicity defeats complexity.</p>
+                <div class="bio-box">
+                    <strong>About Dr Mariola Marzouk:</strong> I specialize in Trade-Based Money Laundering (TBML) and hold a PhD in Criminal Justice. My career spans global software firms, major consultancies, charities, and advisory roles supporting institutions in tackling complex economic crime risks while maximizing customer experience.
+                </div>
+                <div class="stats">
+                    <div class="stat-box">
+                        <div class="number">10</div>
+                        <div class="label">Foundation Lessons</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number">1</div>
+                        <div class="label">Interactive Case</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number">60</div>
+                        <div class="label">Minutes</div>
+                    </div>
+                </div>
+                <p style="margin-top: 24px;">After this module, you'll understand:</p>
+                <ul style="text-align: left; display: inline-block; font-size: 14px; margin-top: 12px;">
+                    <li>✓ How money laundering really works (and why compliance often misses it)</li>
+                    <li>✓ Why FATF's TBML definition is incomplete</li>
+                    <li>✓ How technology fails to detect simple schemes at massive scale</li>
+                    <li>✓ The cost of regulatory theater and who bears it</li>
+                </ul>
+                <div style="margin-top: 24px;">
+                    <button class="btn btn-primary" onclick="startModule()">Start Beginner Module</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 0: FOUNDATION -->
+        <div id="module0" style="display: none;">
+            <div class="lesson-content active">
+                <div class="lesson-header">
+                    <div>
+                        <h2>Module 0: Where Money Laundering Comes From</h2>
+                        <p style="color: var(--color-text-secondary); margin-top: 4px;">5 lessons • Foundation knowledge</p>
+                    </div>
+                    <div class="progress-indicator">
+                        <div class="progress-dot active"></div>
+                        <div class="progress-dot"></div>
+                        <div class="progress-dot"></div>
+                        <div class="progress-dot"></div>
+                        <div class="progress-dot"></div>
+                    </div>
+                </div>
+
+                <div class="lesson-grid" id="module0-lessons">
+                    <div class="lesson-item" onclick="loadLesson('0.1')">
+                        <h3>0.1: Money Laundering 101 - The Definition</h3>
+                        <p>IMF estimates: $2–5% of global GDP (~$2.3–2.9T/yr). The three classic stages.</p>
+                    </div>
+                    <div class="lesson-item" onclick="loadLesson('0.2')">
+                        <h3>0.2: How We Measure Money Laundering</h3>
+                        <p>Zdanowicz pricing anomalies, and why detection lags reality.</p>
+                    </div>
+                    <div class="lesson-item" onclick="loadLesson('0.3')">
+                        <h3>0.3: History - Why This Became a Thing</h3>
+                        <p>1970 BSA → 1989 FATF → 9/11. How the U.S. and UK shaped the world's AML framework.</p>
+                    </div>
+                    <div class="lesson-item" onclick="loadLesson('0.4')">
+                        <h3>0.4: Vulnerabilities & Enablers</h3>
+                        <p>Why even "tight" controls fail. The factors that make countries ripe for laundering.</p>
+                    </div>
+                    <div class="lesson-item" onclick="loadLesson('0.5')">
+                        <h3>0.5: The Risk-Based Approach (RBA)</h3>
+                        <p>What it's supposed to do vs. what banks actually do. Theory vs. practice.</p>
+                    </div>
+                </div>
+
+                <div id="lesson-content-0.1" class="lesson-content" style="display: none;">
+                    <h3>0.1: Money Laundering 101 - The Definition</h3>
+                    <p>Money laundering is the process of concealing or disguising the origins of illegally obtained proceeds so they appear to be earned via legitimate means.</p>
+
+                    <div class="key-insight">
+                        <strong>Key Insight:</strong>
+                        The global estimate of money laundering is <strong>$2–5% of global GDP</strong>=<strong>$2.3–2.9 trillion annually</strong> (IMF, 1998; recent academic studies confirm similar figures). Yet enforcement and detection remain fragmented.
+                    </div>
+
+                    <p><strong>The Three Classic Stages:</strong></p>
+                    <ul style="padding-left: 30px;">
+    <li><strong>Placement:</strong> Illicit cash enters the financial system (deposits, purchases, trade transactions)</li>
+    <li><strong>Layering:</strong> Complex transfers obscure the money's origin (shell companies, multiple transfers, manipulated trade invoicing)</li>
+    <li><strong>Integration:</strong> Money re-enters the economy as apparently legitimate income. For example, criminals invest laundered funds into a restaurant chain that reports the money as normal business profits.</li>
+</ul>
+
+                    <div class="why-it-matters">
+                        <strong>Why It Matters:</strong>
+                        Understanding these three stages helps you see where each one can be detected—and where our detection approaches typically fail.
+                    </div>
+
+                    <p>What makes this invisible is <strong>ambiguity</strong>. Laundering happens alongside legitimate commerce. A $2M fabric shipment that costs $500K to import is either a deal, fraud, or money laundering. Without context, it's almost impossible to tell the difference.</p>
+
+                    <div class="nav-buttons">
+                        <button class="btn btn-secondary" onclick="previousModule()" style="background: var(--color-primary-red); color: white;">← Back</button>
+                        <button class="btn btn-primary" onclick="nextLesson('0.2')">Next Lesson →</button>
+                    </div>
+                </div>
+
+                <div id="lesson-content-0.2" class="lesson-content" style="display: none;">
+                    <h3>0.2: How We Measure Money Laundering</h3>
+                    <p>If laundering is $2–5 trillion annually, how do we know? Who measured it? The uncomfortable truth: our "consensus" figures are built on circular estimation and weak methodology.</p>
+
+                    <div class="key-insight">
+                        <strong>The Scale Mythology: From Thin Air to Gospel Truth</strong>
+                        The global money laundering consensus emerged not from rigorous empirical research, but from a recycling loop. The widely cited Gravity Model (Walker, 1995) estimated $2.85T in global laundering, yet it was based on only 9 usable expert questionnaires—mostly from Australia—with wildly inconsistent figures and no verification of respondent expertise. 1998 The IMF estimated a similar scale of 2–5% of global GDP (~$1.5T) using what one academic called a "wet finger approach." The methodology could not even be retraced by IMF staff. Yet this number was endlessly repeated by FATF, World Bank, UN, and academia—becoming gospel without verification.
+                    </div>
+
+                    <div class="why-it-matters">
+                        <strong>Why It Matters:</strong>
+                        The foundational number regulators use to justify Anti-Money Laundering (AML) frameworks is not scientifically derived—it's politically legitimated repetition. When you base a global regulatory system on a methodology that cannot be retraced, you're building on mythology.
+                    </div>
+
+                    <p><strong>Other Estimates</strong></p>
+                    <p>There is a spectacular range of global money laundering estimates over time, starting from $30 billion—which ‘pleased no one'.</p>
+
+                   <ul style="margin-left: 40px;">
+    <li>OECD 1995: $1.1 trillion (Drugs)</li>
+    <li>UNODC 2011: $1.6 billion</li>
+    <li>FBI: $600 billion – $1.5 trillion</li>
+    <li>Reuter and Greenfield 2001: $45–280 billion</li>
+</ul>
+
+
+                    <div class="why-it-matters">
+                        <strong>Why It Matters:</strong>
+                        It matters because if the core estimates are methodologically unsupported, then the scale, cost, and design of global AML regulation may be mismatched to reality—overstating some risks while missing others entirely.
+                    </div>
+
+                    <div class="nav-buttons">
+                        <button class="btn btn-secondary" onclick="previousLesson('0.1')" style="background: var(--color-primary-red); color: white;">← Back</button>
+                        <button class="btn btn-primary" onclick="nextLesson('0.3')">Next Lesson →</button>
+                    </div>
+                </div>
+
+                <div id="lesson-content-0.3" class="lesson-content" style="display: none;">
+                    <h3>0.3: History - Why This Became a Thing</h3>
+                    <p>The modern AML framework wasn't inevitable. It emerged from specific policy choices by two countries: the U.S. and UK.</p>
+
+                    <div class="key-insight">
+                        <strong>Key Timeline:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li><strong>1970:</strong> U.S. Bank Secrecy Act (BSA) — first federal law requiring financial institutions to report suspicious cash transactions</li>
+                            <li><strong>1989:</strong> Financial Action Task Force (FATF) founded by G-7 to create international AML standards</li>
+                            <li><strong>2001:</strong> Post-9/11 USA PATRIOT Act — AML expanded to counter-terrorism financing</li>
+                            <li><strong>2005+:</strong> EU AML Directives, FATF Recommendations, global adoption</li>
+                        </ul>
+                    </div>
+<h3>Play with this Interactive TBML Timeline</h3>
+<iframe 
+    src="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/5293056bdb00247494b49ad8dd41c244/980bdc52-71fd-438e-bc4d-90584c7685e9/canvas-app/index.html?rnd=1763938726953" 
+    width="100%" 
+    height="600" 
+    style="border:1px solid #ccc;" 
+    title="Interactive Timeline">
+</iframe>
+
+   <div style="padding-top: 20px;">
+    <p>
+                    <strong>Why This Matters Historically:</strong> The U.S. shaped how the world defines money laundering—focused on cash deposits, trade finance, and cross-border transfers. But this lens misses many creative schemes that commingle, for example, domestic abuse, corporate profit shifting, and service-based laundering (topics we'll cover later).</p>
+</div>
+                    <div class="why-it-matters">
+                        <strong>Why It Matters Now:</strong>
+                        Understanding that AML is a policy choice (not a law of nature) helps us see its blind spots. If the framework was designed in 1970 for cash-heavy crime, does it still fit 2024's digital economy and corporate TBML?
+                    </div>
+
+                    <div class="nav-buttons">
+                        <button class="btn btn-secondary" onclick="previousLesson('0.2')" style="background: var(--color-primary-red); color: white;">← Back</button>
+                        <button class="btn btn-primary" onclick="nextLesson('0.4')">Next Lesson →</button>
+                    </div>
+                </div>
+
+                <div id="lesson-content-0.4" class="lesson-content" style="display: none;">
+                    <h3>0.4: Vulnerabilities & Enablers</h3>
+                    <p>Some countries are more vulnerable to Money Laundering than others. Ferwerda, J. et al. (2020) estimates around $2.3 trillion laundered globally per year, and finds that the United States and United Kingdom together account for about 40% of all money laundering within the 36 OECD countries examined. Why? Button et al. (2022) define two key concepts:</p>
+
+                    <div class="key-insight">
+                        <strong>Key Insight:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li><strong>Vulnerabilities:</strong> Opportunities threat actors can exploit – for example, specific people, processes, systems, sectors or country features that create openings for laundering illicit proceeds</li>
+                            <li><strong>Enablers:</strong> People, organisations, systems, or processes that actively facilitate or amplify the exploitation of those vulnerabilities (for instance, professional intermediaries, weak supervision tools, or opaque corporate structures)</li>
+                        </ul>
+                    </div>
+
+                    <p><strong>The Perfect Storm (Why U.S. & UK Have High Money Laundering):</strong></p>
+
+<ul style="margin-left: 30px; line-height: 1.6;">
+    <li><strong>High GDP + Ease of Trade:</strong> Legitimate commerce is voluminous; laundering blends in</li>
+    <li><strong>Colonial and Network Ties:</strong> UK's network of offshore tax havens (Cayman Islands, BVIs, etc.) provides profit-shifting infrastructure</li>
+    <li><strong>Financial Sophistication and Professional Enablers:</strong> Professional enablers (lawyers, accountants, shell company services) are abundant</li>
+    <li><strong>Structural Enforcement Weaknesses:</strong> Low prosecution rates and under‑resourced law enforcement and regulators relative to the scale and complexity of money flows</li>
+ <li><strong>Regulatory Side‑Effects:</strong> Harsh compliance expectations on banks raise the price of obfuscation (benefiting professional launderers) while frontline staff struggle to understand evolving schemes</li>
+</ul>
+                    <div class="why-it-matters">
+                        <strong>Why It Matters:</strong>
+                        If vulnerabilities are structural (size of economy, legitimate trade volume), then adding more controls might not reduce laundering—only shift it to harder-to-detect methods; such as TBML.
+                    </div>
+
+                    <div class="nav-buttons">
+                        <button class="btn btn-secondary" onclick="previousLesson('0.3')" style="background: var(--color-primary-red); color: white;">← Back</button>
+                        <button class="btn btn-primary" onclick="nextLesson('0.5')">Next Lesson →</button>
+                    </div>
+                </div>
+
+                <div id="lesson-content-0.5" class="lesson-content" style="display: none;">
+                    <h3>0.5: The Risk-Based Approach (RBA)</h3>
+                    <p>By the 2000s, regulators realized that one-size-fits-all AML detection rules weren't working. They introduced a new <strong>Risk-Based Approach (RBA)</strong> principles. RBA is a regulatory framework that requires countries, competent authorities, and financial institutions to identify, assess, and understand their specific money laundering and terrorist financing risks, then apply controls that are proportionate to the level and nature of those risks instead of applying the same checks to everything and everyone. In practice, this means they are expected to allocate resources and impose preventive measures more intensely where the risks are higher, and more lightly where risks are demonstrably lower, with the explicit recognition that the RBA “is not a zero‑failure approach” and that some criminal abuse will still occur even when reasonable measures are taken.</p>
+
+                    <div class="key-insight">
+                        <strong>What the RBA Says (in theory):</strong>
+                        <ul style="margin-top: 8px;">
+                            <li>Institutions should <strong>identify, assess, and understand</strong> their money laundering risks and apply controls <strong>proportionate to risk</strong> (not blanket rules for everyone)</li>
+            
+                            <li>High-risk customers: enhanced due diligence</li>
+                            <li>Low-risk customers: lighter touch</li>
+                        </ul>
+                    </div>
+
+                <p><strong>In Practice:</strong> Banks still use rule-based compliance because:</p>
+
+<ul style="margin-left: 30px; line-height: 1.6;">
+    <li>RBA requires deep understanding of customer risk (expensive, requires expertise)</li>
+    <li>Regulators themselves follow rule-based assessment frameworks and often fine banks for <strong>non-compliance</strong> (easier to prove) rather than RBA failures (harder to prove)</li>
+    <li>Rule-based compliance is simpler to audit and defend because rule creates predictable, documented steps</li>
+</ul>
+
+                    <div class="why-it-matters">
+                        <strong>Why It Matters:</strong>
+                        This gap between <strong>Risk-Based Approach theory</strong> and <strong>rule-based practice</strong> is the crux of money laundering detection failure. Banks check boxes (such as with trade finance rules) while missing actual risk (aggressive corporate profit shifting for tax evasion).
+                    </div>
+
+                    <p><strong>Next Step:</strong> Now that you understand the foundation, Module 1 will introduce TBML specifically—what FATF says it is, and then what the research reveals it actually is.</p>
+
+                    <div class="nav-buttons">
+                        <button class="btn btn-secondary" onclick="previousLesson('0.4')" style="background: var(--color-primary-red); color: white;">← Back</button>
+                        <button class="btn btn-primary" onclick="startModule1()">Start Module 1 →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 1: RETHINKING TBML -->
+        <div id="module1" style="display: none;">
+            <div class="lesson-content active">
+                <div class="lesson-header">
+                    <div>
+                        <h2>Module 1: Rethinking TBML Foundations</h2>
+                        <p style="color: var(--color-text-secondary); margin-top: 4px;">5 lessons • FATF definition → critical analysis</p>
+                    </div>
+                    <div class="progress-indicator">
+                        <div class="progress-dot active"></div>
+                        <div class="progress-dot"></div>
+                        <div class="progress-dot"></div>
+                        <div class="progress-dot"></div>
+                        <div class="progress-dot"></div>
+                    </div>
+                </div>
+
+                <div class="lesson-grid" id="module1-lessons">
+                    <div class="lesson-item" onclick="loadLesson('1.0')">
+                        <h3>1.0: What FATF Says TBML Is</h3>
+                        <p>The official 2006 definition and scope — where regulators started.</p>
+                    </div>
+                    <div class="lesson-item" onclick="loadLesson('1.1')">
+                        <h3>1.1: How FATF Got It Wrong</h3>
+                        <p>Trade finance focus. Missing: domestic SMEs, open accounts, tax evasion structures.</p>
+                    </div>
+                    <div class="lesson-item" onclick="loadLesson('1.2')">
+                        <h3>1.2: The Blind Spots</h3>
+                        <p>Most TBML is tax evasion. Small businesses do it invisibly. Everyone hides in open accounts.</p>
+                    </div>
+                    <div class="lesson-item" onclick="loadLesson('1.3')">
+                        <h3>1.3: Why Typological Checklists Fail</h3>
+                        <p>Banks check boxes. Laundering happens elsewhere. Symbolic vs. substantive compliance.</p>
+                    </div>
+                    <div class="lesson-item" onclick="loadLesson('1.4')">
+                        <h3>1.4: Technology That Failed to Prevent TD Bank</h3>
+                        <p>$500M invested. 57 AI specialists. $653M laundered anyway. What went wrong?</p>
+                    </div>
+                </div>
+
+                <div id="lesson-content-1.0" class="lesson-content" style="display: none;">
+                    <h3>1.0: What FATF Says TBML Is</h3>
+                    <p>FATF published its first TBML report in 2006. Here's what it officially defined:</p>
+
+                    <div class="key-insight">
+                        <strong>FATF 2006 Definition of TBML:</strong>
+                        "The process of disguising the proceeds of crime and moving value through the use of trade transactions in an attempt to legitimise their illicit origins. FATF 2006 further emphasises that criminal organisations frequently misrepresent the price, quantity, or quality of imports and exports in international trade as a core mechanism for doing this."
+                    </div>
+
+              <p><strong>FATF's Scope (What it covers):</strong></p>
+
+<ul style="margin-left: 30px; line-height: 1.6;">
+    <li>Emphasis on import/export transactions where value is moved by misrepresenting the price, quantity or quality of goods</li>
+    <li>Over‑ and under‑invoicing, over‑ and under‑shipments, misclassification of goods, phantom shipments, and similar document-based manipulation.</li>
+    <li>Priority attention to letters of credit, collections and similar structured trade finance products, rather than open-account trade or domestic trade flows.</li>
+    <li>Framed mainly as something done by organised criminal groups, not by “legitimate” corporates engaging in tax-driven trade abuse that uses identical techniques.</li>
+    <li>Only vague acknowledgement that services and domestic trade can be used as TBML cover; the operational focus and typologies remain dominated by international goods trade</li>
+</ul>
+
+                    <div class="why-it-matters">
+                        <strong>Why This Matters:</strong>
+                        This is the "official story." It's what regulators, regulatory technology providers (RegTechs), what compliance officers code into policies and systems, and what banks are primarily monitored against. Understanding it is step 1. Recognizing its limitations is step 2.
+                    </div>
+
+                    <div class="nav-buttons">
+                        <button class="btn btn-secondary" onclick="previousModule()" style="background: var(--color-primary-red); color: white;">← Back to Module 0</button>
+                        <button class="btn btn-primary" onclick="nextLesson('1.1')">Next Lesson →</button>
+                    </div>
+                </div>
+
+                <div id="lesson-content-1.1" class="lesson-content" style="display: none;">
+                    <h3>1.1: How FATF Got It Wrong</h3>
+                    <p>FATF's definition is not wrong—it's incomplete. Here's what it misses:</p>
+
+                    <div class="key-insight">
+                        <strong>FATF's Blind Spots:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li><strong>Domestic trade:</strong> FATF focuses on cross-border. Domestic Small and Medium-sized Enterprises (SMEs) laundering via local trade are invisible.</li>
+                            <li><strong>Open account transfers:</strong> FATF focuses on trade finance products (LCs, bills of exchange). Open account (direct bank transfers) lacks the same policing rigor.</li>
+                            <li><strong>Service-based TBML:</strong> FATF focuses on goods. What about services? Consulting contracts, management fees, royalties? (the list is endless)</li>
+                            <li><strong>Corporate profit shifting:</strong> FATF doesn't classify tax-driven transfer pricing as "TBML" — but it functions identically and it is hard to tell what was an ethical transfer and what was not. For example, In 2016, Apple shifted billions of dollars in profits to a low-tax Irish subsidiary, allowing it to pay almost no corporate tax on European earnings, which was later challenged by the EU.</li>
+                        </ul>
+                    </div>
+
+                    <p><strong>The Result:</strong> Banks build compliance systems for the FATF's TBML understanding and tend to miss other TBML schemes such as tax evasion via corporate structures, domestic SME abuse, open account transfers, barter trade where goods/services are exchanged for other goods/services, and many other crafty methods.</p>
+
+                    <div class="why-it-matters">
+                        <strong>Why It Matters:</strong>
+                        If you're monitoring for the wrong thing, you can have perfect monitoring and still miss laundering. This is the core paradox of AML regulation.
+                    </div>
+
+                    <div class="nav-buttons">
+                        <button class="btn btn-secondary" onclick="previousLesson('1.0')" style="background: var(--color-primary-red); color: white;">← Back</button>
+                        <button class="btn btn-primary" onclick="nextLesson('1.2')">Next Lesson →</button>
+                    </div>
+                </div>
+
+                <div id="lesson-content-1.2" class="lesson-content" style="display: none;">
+                    <h3>1.2: The Blind Spots</h3>
+                    <p>My PhD research project analyzed 27 senior banking compliance professionals. Here's what they revealed:</p>
+
+                    <div class="key-insight">
+                        <strong>Key Finding:</strong> "Most of the TBML methods are linked to suspicious corporate tax behaviour" — not drug cash, not terrorism finance, but tax evasion.
+                    </div>
+
+<p><strong>What Tends to be Missed:</strong></p>
+
+<ul style="margin-left: 30px; line-height: 1.6;">
+    <li><strong>Profit Shifting:</strong> A UK parent company purchases goods or services from its own subsidiary in a low‑tax jurisdiction at deliberately inflated prices, so that most of the group’s profit appears in the tax haven rather than in the UK. The UK entity shows lower taxable income, while the subsidiary books high profits taxed at minimal rates, even though little real economic activity occurs there.</li>
+    <li><strong>Domestic SME Trading:</strong> Small businesses in the UK supply each other at suspicious prices (e.g., $2M order, $500K payment). Operates domestically; regulators don't monitor as much; invisible to FATF's "cross-border" focus.</li>
+    <li><strong>Open Account Transfers:</strong> Two companies move $500K between themselves on standard payment terms using only basic invoices and bank transfers, with little or no independent verification of the underlying trade. Because this is routine “everyone does it” business, the flow bypasses trade finance products and the associated documentary scrutiny, creating an easy channel to move value with minimal oversight.</li>
+</ul>
+
+                    <p style="margin-top: 20px;">
+    <strong>Interview Finding:</strong> "If suspicious activities are found, they rarely pertain to money laundering—mostly fraud.", "Everyone hides behind open account transfers to move money around."
+</p>
+
+
+                    <div class="why-it-matters">
+                        <strong>Why It Matters:</strong>
+                        Compliance professionals know more than regulators give them credit for. But they're incentivized to catch what's easiest to prove (fraud), not what's hardest (TBML). The system rewards false positives on compliance theater, not true prevention.
+                    </div>
+
+                    <div class="nav-buttons">
+                        <button class="btn btn-secondary" onclick="previousLesson('1.1')" style="background: var(--color-primary-red); color: white;">← Back</button>
+                        <button class="btn btn-primary" onclick="nextLesson('1.3')">Next Lesson →</button>
+                    </div>
+                </div>
+
+                <div id="lesson-content-1.3" class="lesson-content" style="display: none;">
+                    <h3>1.3: Why Typological Checklists Fail</h3>
+                    <p>Banks use checklists. "Red flag matrix" mentality: if you see X, escalate it.</p>
+
+                    <div class="key-insight">
+                        <strong>The Checklist Problem:</strong>
+                        Banks monitor for FATF TBML flags such as:
+                        <ul style="margin-top: 8px;">
+                            <li>✓ Over‑invoicing detected → Flag</li>
+    <li>✓ Under‑invoicing detected → Flag</li>
+    <li>✓ Mismatch between invoice and transport document → Flag</li>
+    <li>✓ New customer from “high‑risk jurisdiction” → Flag</li>
+    <li>✓ Shell or recently incorporated company account → Flag</li>
+    <li>✓ Customer or counterparty on watchlist / PEP list hit → Flag</li>
+    <li>✓ Unusual cash deposits into business account → Flag</li>
+    <li>✓ Repeated high‑value transfers just below threshold → Flag</li>
+    <li>✓ Rapid in‑and‑out movement of funds with no obvious business purpose → Flag</li>
+    <li>✓ Trade in dual‑use / sanctioned goods without clear licences → Flag</li>
+                        </ul>
+                        <p style="margin-top: 8px;">But:</p>
+                        <li>✗ Suspicious profit shifting dressed as normal transfer pricing to low‑tax affiliates → NOT flagged as TBML, treated as tax planning.​</li>
+    <li>✗ Domestic SME trading chains (UK suppliers and buyers invoicing each other at odd prices, settled by simple bank transfers) → NOT flagged, as supervisors and banks focus on cross‑border trade finance.​</li>
+    <li>✗ Open account transfers (large values moved on standard terms with only basic invoices in the banking system) → NOT flagged, because there are no letters of credit or collections to trigger trade‑finance controls.​</li>
+    <li>✗ Service invoices (consulting, marketing, “management fees”) between related parties, where value is easy to disguise and hard to benchmark → Seldom treated as TBML risk, even though methods mirror classic mispricing.​</li>
+    <li>✗ Flows routed through respected hubs (US/UK, EU, major financial centres) with good KYC files → Assumed lower risk, despite research evidence that these jurisdictions host and transit a huge share of global laundering.​</li>
+    <li>✗ Customers with perfect documentation but obviously tax‑motivated structures (use of British offshore dependencies, secrecy jurisdictions) → Treated as legal tax planning, not as laundering‑adjacent trade abuse.​</li>
+                        </ul>
+                    </div>
+
+                    <p><strong>Real Consequence:</strong> Banks file SARs on <strong>obvious red flags</strong> (which are often false alarms) and <strong>miss laundering that looks like a legitimate trade</strong> (In essence, ignoring what looks too good to be true).</p>
+
+                   <p style="margin-top: 20px;">
+    <strong>My Research Finding:</strong> Experienced transaction monitors catch things automated systems miss—but only if they know what to look for. If the compliance culture teaches "watch for over-invoicing," they'll miss "legitimate-looking but wrongful profit shifting."
+</p>
+
+                    <div class="why-it-matters">
+                        <strong>Why It Matters:</strong>
+                        Compliance is not neutral. The typologies you're taught to watch become the only things you see. This is why FATF's narrow definition cascades into narrow practice.
+                    </div>
+
+                    <div class="nav-buttons">
+                        <button class="btn btn-secondary" onclick="previousLesson('1.2')" style="background: var(--color-primary-red); color: white;">← Back</button>
+                        <button class="btn btn-primary" onclick="nextLesson('1.4')">Next Lesson →</button>
+                    </div>
+                </div>
+
+                <div id="lesson-content-1.4" class="lesson-content" style="display: none;">
+                    <h3>1.4: Technology That Failed to Prevent TD Bank</h3>
+                    <p>TD Bank is a perfect teaching case because it had everything. Let's break down what happened vs. what we can infer:</p>
+
+                    <div class="key-insight">
+                        <strong>What TD Bank Had:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li>✓ $500M+ invested in AML infrastructure</li>
+                            <li>✓ 57 AI specialists hired through Vector Institute partnership</li>
+                            <li>✓ Transaction monitoring systems across 1,100+ branches</li>
+                            <li>✓ Customer name screening, risk rating, automated controls</li>
+                        </ul>
+                    </div>
+
+                    <p><strong>What Happened Anyway:</strong></p>
+
+                    <div class="evidence-flag">
+                        <strong>WHAT WE KNOW (from regulatory filings):</strong>
+                        <ul style="margin-top: 4px;">
+                            <li>Da Ying Sze laundered ~$653M overall; ~$400–470M through TD Bank, 2016–2021</li>
+                            <li>Method: Cash deposits to multiple branches, small business accounts, bribes to employees</li>
+                            <li>TD failed to identify Sze on >500 Currency Transaction Reports (CTRs)</li>
+                            <li>TD's SARs were inaccurate, incomplete, or not filed timely</li>
+                            <li>Transaction monitoring system omitted key categories: ACH transfers, checks, certain cash flows</li>
+                        </ul>
+                    </div>
+
+                    <div class="evidence-flag">
+                        <strong>WHAT WE DON'T KNOW (but is plausible):</strong>
+                        <ul style="margin-top: 4px;">
+                            <li>Whether TD's AI systems flagged the full $653M"</li>
+                            <li>Exact breakdown of why monitoring omitted certain transaction types (budget? design? oversight?)</li>
+                        </ul>
+                    </div>
+
+<p style="margin-top: 20px;">                    
+<strong>What We Can Infer:</strong> TD's monitoring system had <strong>architectural gaps</strong>—it wasn't designed to see all transaction types. This wasn't malicious; it was a product of FATF-centric compliance design.</p>
+
+<p style="margin-top: 20px;">                    
+<strong>The Tech Failure:</strong> Technology designed for FATF's TBML (trade finance, cross-border, document fraud) couldn't detect simple TBML (cash + small business accounts + employee corruption).</p>
+
+                    <div class="why-it-matters">
+                        <strong>Why It Matters:</strong>
+                        This is the central paradox: <strong>More technology doesn't prevent the simplest schemes.</strong> It prevents the schemes the technology was designed to prevent. But if your mental model is wrong (FATF's TBML), your technology will be wrong too.
+                    </div>
+
+                    <div class="nav-buttons">
+                        <button class="btn btn-secondary" onclick="previousLesson('1.3')" style="background: var(--color-primary-red); color: white;">← Back</button>
+                        <button class="btn btn-primary" onclick="startCaseStudy()">Start Interactive Case Study →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- INTERACTIVE CASE STUDY -->
+        <div id="caseStudy" style="display: none;">
+            <div class="card">
+                <h2 style="color: var(--color-primary-red); margin-bottom: 20px;">Interactive Case Study: TD Bank & Da Ying Sze</h2>
+
+                <div id="case-intro" class="case-decision">
+                    <h3>The Setup</h3>
+                    <p><strong>Case:</strong> Da Ying Sze fentanyl money laundering conspiracy, 2016–2021</p>
+                    <p><strong>Scale:</strong> Sze admitted to laundering US$653M overall; regulators documented ~US$400–470M through TD Bank</p>
+                    <p><strong>Methods:</strong> Cash deposits, small business accounts, box truck runs to multiple branches, $57K+ in bribes to employees (Oscar Nunez-Flores accepted thousands per shell company account opened)</p>
+                    <p><strong>Detection:</strong> DEA/IRS street surveillance in Flushing, Queens — not automated AML systems</p>
+                    <p><strong>Your Learning Objective:</strong> Understand why simple schemes defeat sophisticated technology.</p>
+                    <button class="btn btn-primary" onclick="caseDecision(1)">Begin Decision 1 →</button>
+                </div>
+
+                <div id="case-decision-1" class="case-decision" style="display: none;">
+                    <h3>Decision 1: The Red Flag Problem</h3>
+                    <p><strong>Scenario:</strong> You're a transaction monitor at TD Bank (2019). Your job: spot suspicious patterns.</p>
+                    <p><strong>What Regulators Found (Fact):</strong></p>
+                    <ul>
+                        <li>TD failed to identify Sze on >500 Currency Transaction Reports (CTRs)</li>
+                        <li>TD's SARs were inaccurate, incomplete, or not filed timely</li>
+                        <li>Transactions monitoring system omitted key categories (ACH, checks, certain cash flows)</li>
+                    </ul>
+                    <p><strong>Your Decision:</strong> Given what you see, what should happen?</p>
+
+                    <div class="decision-option" onclick="selectDecision('1A', 'Decision 1')">
+                        <input type="radio" name="decision1" id="decision1A"> 
+                        <label for="decision1A"><strong>A) File SARs immediately on these cash deposits</strong> — This is what SHOULD happen.</label>
+                    </div>
+
+                    <div class="decision-option" onclick="selectDecision('1B', 'Decision 1')">
+                        <input type="radio" name="decision1" id="decision1B"> 
+                        <label for="decision1B"><strong>B) Check if this pattern matches our monitoring rules</strong> — This is what TD's SYSTEM actually did.</label>
+                    </div>
+
+                    <div class="decision-option" onclick="selectDecision('1C', 'Decision 1')">
+                        <input type="radio" name="decision1" id="decision1C"> 
+                        <label for="decision1C"><strong>C) Investigate employee involvement first</strong> — This was also happening (bribes to staff).</label>
+                    </div>
+
+                    <div id="consequence-1" class="decision-consequence">
+                        <h4>What Actually Happened:</h4>
+                        <p>All three were true, but <strong>incomplete</strong>:</p>
+                        <ul>
+                            <li><strong>A) SARs were filed</strong> — but they were inaccurate or incomplete</li>
+                            <li><strong>B) Rules didn't cover it</strong> — TD's monitoring system had blind spots. Cash to small business accounts wasn't flagged.</li>
+                            <li><strong>C) Employees were compromised</strong> — but this wasn't detected by systems; it took enforcement investigators to find it</li>
+                        </ul>
+<p style="margin-bottom: 20px;">  
+                        <strong>Your Learning Insight:</strong> TD had <strong>processes</strong> (people monitoring) but <strong>systems gaps</strong> (what gets monitored). The architectural design of the monitoring system determined what could be seen.</p>
+                        <button class="btn btn-primary" onclick="caseDecision(2)" style="margin-top: 12px;">Next Decision →</button>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="revealConsequence('consequence-1')" style="margin-top: 12px;">Reveal What Happened →</button>
+                </div>
+
+                <div id="case-decision-2" class="case-decision" style="display: none;">
+                    <h3>Decision 2: The Technology Blindspot</h3>
+                    <p><strong>Scenario:</strong> You're TD's Chief Compliance Officer (2020). You've invested in AI-driven transaction monitoring.</p>
+                    <p><strong>What We Know (from regulatory filings):</strong></p>
+                    <ul>
+                        <li>✓ TD invested in transaction monitoring systems</li>
+                        <li>✓ These systems omitted key transaction categories (ACH, checks, some cash flows)</li>
+                        <li>✓ What we DON'T have evidence for: automated systems flagged $653M</li>
+                    </ul>
+                    <p><strong>Your Decision:</strong> What's the real problem?</p>
+
+                    <div class="decision-option" onclick="selectDecision('2A', 'Decision 2')">
+                        <input type="radio" name="decision2" id="decision2A"> 
+                        <label for="decision2A"><strong>A) Expand monitoring to cover all transaction types</strong> — The architectural fix.</label>
+                    </div>
+
+                    <div class="decision-option" onclick="selectDecision('2B', 'Decision 2')">
+                        <input type="radio" name="decision2" id="decision2B"> 
+                        <label for="decision2B"><strong>B) Tune down false positives to improve signal</strong> — A plausible scenario (not documented but likely)</label>
+                    </div>
+
+                    <div class="decision-option" onclick="selectDecision('2C', 'Decision 2')">
+                        <input type="radio" name="decision2" id="decision2C"> 
+                        <label for="decision2C"><strong>C) Accept that some transaction types are "low-risk" and don't need as much monitoring</strong> — What likely happened.</label>
+                    </div>
+
+                    <div id="consequence-2" class="decision-consequence">
+                        <h4>What Actually Happened:</h4>
+                        <p><strong>The Issue:</strong> TD's monitoring system was <strong>architecturally incomplete</strong>, not deliberately disabled.</p>
+                        <ul>
+                            <li><strong>Option A (Expand)</strong> — Never happened</li>
+                            <li><strong>Option C (Accept gaps)</strong> — Most likely. Clarified as “low-risk” doesn’t mean “ignored” but rather less monitored due to system design.</li>
+                        </ul>
+                        <p><strong>The Subtle Problem:</strong> This wasn't identified as TBML. It was the result of <strong>FATF-centric thinking</strong>. If FATF says TBML is "trade finance with document fraud," then you design systems to catch trade finance fraud. You never ask: "What if TBML is actually simple cash + corruption?"</p>
+
+<p style="margin-bottom: 20px;">                        
+<strong>Your Learning Insight:</strong> Technology is not neutral. What you choose to monitor (or don't monitor) shapes what you see. FATF's definition cascaded into technical architecture; technical architecture determined detection capability.</p>
+                        <button class="btn btn-primary" onclick="caseDecision(3)" style="margin-top: 12px;">Final Decision →</button>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="revealConsequence('consequence-2')" style="margin-top: 12px;">Reveal What Happened →</button>
+                </div>
+
+                <div id="case-decision-3" class="case-decision" style="display: none;">
+                    <h3>Decision 3: The Settlement & Cascading Costs</h3>
+                    <p><strong>October 2024:</strong> Regulators announce settlement terms.</p>
+                    <p><strong>What Actually Happened (Facts):</strong></p>
+                    <ul>
+                        <li>✓ TD agreed to pay ~US$3 billion total (FinCEN, DOJ, other regulators)</li>
+                        <li>✓ TD has spent $500M+ on remediation (hiring, training, systems, monitors)</li>
+                        <li>✓ Future costs: regulatory-appointed monitor, compliance infrastructure upgrades, technology investments</li>
+                    </ul>
+                    <p><strong>Your Decision:</strong> Who bears the cost?</p>
+
+                    <div class="decision-option" onclick="selectDecision('3A', 'Decision 3')">
+                        <input type="radio" name="decision3" id="decision3A"> 
+                        <label for="decision3A"><strong>A) TD Bank shareholders absorb it</strong> — Stock price drops, investors lose.</label>
+                    </div>
+
+                    <div class="decision-option" onclick="selectDecision('3B', 'Decision 3')">
+                        <input type="radio" name="decision3" id="decision3B"> 
+                        <label for="decision3B"><strong>B) TD customers and small businesses face stricter rules</strong> — Higher KYC friction, potential de-banking.</label>
+                    </div>
+
+                    <div class="decision-option" onclick="selectDecision('3C', 'Decision 3')">
+                        <input type="radio" name="decision3" id="decision3C"> 
+                        <label for="decision3C"><strong>C) Both A and B; regulatory theater continues</strong> — Fines paid, controls tightened, but the simplest schemes still work.</label>
+                    </div>
+
+                    <div id="consequence-3" class="decision-consequence">
+                        <h4>What Actually Happens:</h4>
+                        <p><strong>Documented Facts:</strong></p>
+                        <ul>
+                            <li>✓ TD's stock dropped after announcement (A happened)</li>
+                            <li>✓ TD announced stricter customer rules and compliance requirements (B happening)</li>
+                        </ul>
+                        <p><strong>What's Speculative (But Likely):</strong> History shows that banks post-enforcement often de-risk their customer base (higher fees, stricter KYC, account closures). Small businesses are typically hit hardest because they're harder to monitor than large multinational corporations.</p>
+                        <p><strong>The Paradox:</strong> TD's $3B penalty + $500M remediation + future monitoring costs will likely reduce TBML through de-banking, not through better detection. Fewer small business accounts = fewer transactions to scrutinize = lower TBML. But it also = less financial inclusion.</p>
+
+<p style="margin-bottom: 20px;">                         
+<strong>Your Learning Insight:</strong> Enforcement creates costs, but the costs distribute unevenly. Shareholders and executives face financial/reputational consequences. Customers (especially small businesses) face restrictions. Actual criminals adapt to new methods. The regulatory system persists, expanded and more expensive.</p>
+                        <button class="btn btn-primary" onclick="completeCaseStudy()" style="margin-top: 12px;">Complete Case Study & Earn Certificate →</button>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="revealConsequence('consequence-3')" style="margin-top: 12px;">Reveal What Happened →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CERTIFICATE -->
+        <div id="certificate" class="certificate">
+            <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/bbf1d58f-1905-4676-99a4-59cb7dacedb1" alt="Meva Logo" class="certificate-logo">
+            <h2>Certificate of Completion</h2>
+            <p style="font-size: 18px; margin: 20px 0;"><strong>Dr Mariola Marzouk's TBML Academy</strong></p>
+            <p style="font-size: 16px; margin: 20px 0;">This certifies that</p>
+          <input 
+    type="text" 
+    id="name-input" 
+    placeholder="Enter your name"
+    oninput="document.getElementById('cert-name').innerText = this.value || '[You]'"
+    style="margin-bottom: 20px;"
+/>
+
+<p style="font-size: 20px; font-weight: 700; margin: 20px 0;" id="cert-name"></p>
+            <p style="font-size: 14px; margin: 20px 0;">has successfully completed the<br><strong>Beginner: Trade-Based Money Laundering Foundations Module</strong></p>
+            <p style="font-size: 14px; margin: 20px 0;">You understand:</p>
+            <ul style="text-align: left; display: inline-block; font-size: 13px;">
+                <li>✓ How money laundering actually works (theory & practice)</li>
+                <li>✓ Why FATF's definition is incomplete</li>
+                <li>✓ How technology fails to detect simple, massive schemes</li>
+                <li>✓ The gap between regulatory intent and real-world compliance</li>
+            </ul>
+            <div class="certificate-badge">Beginner Module Completed</div>
+            <div class="certificate-id" id="cert-id">ID: TBML-2024-000</div>
+            <p style="font-size: 12px; margin-top: 20px; color: var(--color-text-secondary);">Issued: <span id="cert-date"></span></p>
+  
+            <button class="btn btn-secondary" onclick="location.reload()" 
+    style="background: var(--color-primary-red); color: white; margin-left: 12px;">
+    Start Again
+</button>
+
+<button class="btn btn-secondary" 
+    onclick="window.open('https://www.perplexity.ai/spaces/meva-base-8mdHqjoqTXGZbyN.8Gzt6A#0', '_blank')" 
+    style="background: var(--color-primary-blue); color: white; margin-left: 12px;">
+    Chat with Meva Base TBML AI Agent
+</button>
+        </div>
+    </div>
+
+    <script>
+        const lessons = {
+            '0.1': 'lesson-content-0.1',
+            '0.2': 'lesson-content-0.2',
+            '0.3': 'lesson-content-0.3',
+            '0.4': 'lesson-content-0.4',
+            '0.5': 'lesson-content-0.5',
+            '1.0': 'lesson-content-1.0',
+            '1.1': 'lesson-content-1.1',
+            '1.2': 'lesson-content-1.2',
+            '1.3': 'lesson-content-1.3',
+            '1.4': 'lesson-content-1.4'
+        };
+
+        let completedLessons = new Set();
+        let userProgress = {
+            module0: false,
+            module1: false,
+            caseStudy: false
+        };
+
+        function startModule() {
+            document.getElementById('landing').style.display = 'none';
+            document.getElementById('module0').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function startModule1() {
+            document.getElementById('module0').style.display = 'none';
+            document.getElementById('module1').style.display = 'block';
+            userProgress.module0 = true;
+            window.scrollTo(0, 0);
+        }
+
+        function startCaseStudy() {
+            document.getElementById('module1').style.display = 'none';
+            document.getElementById('caseStudy').style.display = 'block';
+            userProgress.module1 = true;
+            window.scrollTo(0, 0);
+        }
+
+        function loadLesson(lessonId) {
+            Object.values(lessons).forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = 'none';
+            });
+            const lessonEl = document.getElementById(lessons[lessonId]);
+            if (lessonEl) lessonEl.style.display = 'block';
+            completedLessons.add(lessonId);
+            window.scrollTo(0, 0);
+        }
+
+        function nextLesson(nextId) {
+            loadLesson(nextId);
+        }
+
+        function previousLesson(prevId) {
+            loadLesson(prevId);
+        }
+
+        function previousModule() {
+            document.getElementById('module0').style.display = 'none';
+            document.getElementById('landing').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function caseDecision(num) {
+            if (num === 1) {
+                document.getElementById('case-intro').style.display = 'none';
+                document.getElementById('case-decision-1').style.display = 'block';
+            } else if (num === 2) {
+                document.getElementById('case-decision-1').style.display = 'none';
+                document.getElementById('case-decision-2').style.display = 'block';
+            } else if (num === 3) {
+                document.getElementById('case-decision-2').style.display = 'none';
+                document.getElementById('case-decision-3').style.display = 'block';
+            }
+            window.scrollTo(0, 0);
+        }
+
+        function selectDecision(option, decision) {
+            const radioId = 'decision' + option[0] + option[1];
+            document.getElementById(radioId).checked = true;
+        }
+
+        function revealConsequence(consequenceId) {
+            document.getElementById(consequenceId).classList.add('show');
+        }
+
+        function completeCaseStudy() {
+            document.getElementById('caseStudy').style.display = 'none';
+            document.getElementById('certificate').classList.add('show');
+            
+            // Generate certificate details
+            const now = new Date();
+            const certId = 'TBML-' + now.getFullYear() + '-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+            document.getElementById('cert-id').textContent = 'ID: ' + certId;
+            document.getElementById('cert-date').textContent = now.toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'});
+            
+            userProgress.caseStudy = true;
+            window.scrollTo(0, 0);
+        }
+
+        function downloadCertificate() {
+            alert('Certificate download feature will integrate with your PDF generation service. This is a placeholder.');
+            // In production: generate PDF with certificate details
+        }
+    </script>
+</body>
+</html>
