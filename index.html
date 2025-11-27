@@ -28,6 +28,7 @@
             line-height: 1.5;
             color: var(--color-text);
             background: var(--color-bg);
+            scroll-behavior: smooth; /* NEW: smooth scroll to lesson */
         }
 
         body {
@@ -531,10 +532,10 @@
 
                     <p><strong>The Three Classic Stages:</strong></p>
                     <ul style="padding-left: 30px;">
-    <li><strong>Placement:</strong> Illicit cash enters the financial system (deposits, purchases, trade transactions)</li>
-    <li><strong>Layering:</strong> Complex transfers obscure the money's origin (shell companies, multiple transfers, manipulated trade invoicing)</li>
-    <li><strong>Integration:</strong> Money re-enters the economy as apparently legitimate income. For example, criminals invest laundered funds into a restaurant chain that reports the money as normal business profits.</li>
-</ul>
+                        <li><strong>Placement:</strong> Illicit cash enters the financial system (deposits, purchases, trade transactions)</li>
+                        <li><strong>Layering:</strong> Complex transfers obscure the money's origin (shell companies, multiple transfers, manipulated trade invoicing)</li>
+                        <li><strong>Integration:</strong> Money re-enters the economy as apparently legitimate income. For example, criminals invest laundered funds into a restaurant chain that reports the money as normal business profits.</li>
+                    </ul>
 
                     <div class="why-it-matters">
                         <strong>Why It Matters:</strong>
@@ -566,13 +567,12 @@
                     <p><strong>Other Estimates</strong></p>
                     <p>There is a spectacular range of global money laundering estimates over time, starting from $30 billion—which ‘pleased no one'.</p>
 
-                   <ul style="margin-left: 40px;">
-    <li>OECD 1995: $1.1 trillion (Drugs)</li>
-    <li>UNODC 2011: $1.6 billion</li>
-    <li>FBI: $600 billion – $1.5 trillion</li>
-    <li>Reuter and Greenfield 2001: $45–280 billion</li>
-</ul>
-
+                    <ul style="margin-left: 40px;">
+                        <li>OECD 1995: $1.1 trillion (Drugs)</li>
+                        <li>UNODC 2011: $1.6 billion</li>
+                        <li>FBI: $600 billion – $1.5 trillion</li>
+                        <li>Reuter and Greenfield 2001: $45–280 billion</li>
+                    </ul>
 
                     <div class="why-it-matters">
                         <strong>Why It Matters:</strong>
@@ -635,8 +635,7 @@
                     </div>
 
                     <p><strong>The Perfect Storm (Why U.S. & UK Have High Money Laundering):</strong></p>
-
-<ul style="margin-left: 30px; line-height: 1.6;">
+                    <ul style="margin-left: 30px; line-height: 1.6;">
     <li><strong>High GDP + Ease of Trade:</strong> Legitimate commerce is voluminous; laundering blends in</li>
     <li><strong>Colonial and Network Ties:</strong> UK's network of offshore tax havens (Cayman Islands, BVIs, etc.) provides profit-shifting infrastructure</li>
     <li><strong>Financial Sophistication and Professional Enablers:</strong> Professional enablers (lawyers, accountants, shell company services) are abundant</li>
@@ -807,7 +806,6 @@
                     <p style="margin-top: 20px;">
     <strong>Interview Finding:</strong> "If suspicious activities are found, they rarely pertain to money laundering—mostly fraud.", "Everyone hides behind open account transfers to move money around."
 </p>
-
 
                     <div class="why-it-matters">
                         <strong>Why It Matters:</strong>
@@ -1153,9 +1151,13 @@
                 if (el) el.style.display = 'none';
             });
             const lessonEl = document.getElementById(lessons[lessonId]);
-            if (lessonEl) lessonEl.style.display = 'block';
-            completedLessons.add(lessonId);
-            window.scrollTo(0, 0);
+            if (lessonEl) {
+                lessonEl.style.display = 'block';
+                completedLessons.add(lessonId);
+
+                // NEW: scroll directly to this lesson instead of top
+                lessonEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
 
         function nextLesson(nextId) {
